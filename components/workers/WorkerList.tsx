@@ -12,6 +12,9 @@ import { useOptimisticWorkers } from "@/app/(app)/workers/useOptimisticWorkers";
 import { Button } from "@/components/ui/button";
 import WorkerForm from "./WorkerForm";
 import { PlusIcon } from "lucide-react";
+import { columns } from "./DataTables/dataTables";
+import { DataTable } from "./DataTables/columns";
+
 
 type TOpenModal = (worker?: Worker) => void;
 
@@ -57,15 +60,9 @@ export default function WorkerList({
       {optimisticWorkers.length === 0 ? (
         <EmptyState openModal={openModal} />
       ) : (
-        <ul>
-          {optimisticWorkers.map((worker) => (
-            <Worker
-              worker={worker}
-              key={worker.id}
-              openModal={openModal}
-            />
-          ))}
-        </ul>
+        <div className="container mx-auto py-10">
+        <DataTable columns={columns} data={optimisticWorkers} />
+      </div>
       )}
     </div>
   );

@@ -131,6 +131,7 @@ const WorkerForm = ({
         <Input
           type="text"
           name="name"
+          required
           className={cn(errors?.name ? "ring ring-destructive" : "")}
           defaultValue={worker?.name ?? ""}
         />
@@ -152,6 +153,7 @@ const WorkerForm = ({
         <Input
           type="text"
           name="salary"
+          required
           className={cn(errors?.salary ? "ring ring-destructive" : "")}
           defaultValue={worker?.salary ?? ""}
         />
@@ -173,6 +175,7 @@ const WorkerForm = ({
         <Input
           type="text"
           name="ci"
+          required
           className={cn(errors?.ci ? "ring ring-destructive" : "")}
           defaultValue={worker?.ci ?? ""}
         />
@@ -194,6 +197,8 @@ const WorkerForm = ({
         <Input
           type="text"
           name="adress"
+          required
+          
           className={cn(errors?.adress ? "ring ring-destructive" : "")}
           defaultValue={worker?.adress ?? ""}
         />
@@ -215,6 +220,7 @@ const WorkerForm = ({
         <Input
           type="text"
           name="phoneNumber"
+          required
           className={cn(errors?.phoneNumber ? "ring ring-destructive" : "")}
           defaultValue={worker?.phoneNumber ?? ""}
         />
