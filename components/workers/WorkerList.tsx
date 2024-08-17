@@ -68,41 +68,7 @@ export default function WorkerList({
   );
 }
 
-const Worker = ({
-  worker,
-  openModal,
-}: {
-  worker: CompleteWorker;
-  openModal: TOpenModal;
-}) => {
-  const optimistic = worker.id === "optimistic";
-  const deleting = worker.id === "delete";
-  const mutating = optimistic || deleting;
-  const pathname = usePathname();
-  const basePath = pathname.includes("workers")
-    ? pathname
-    : pathname + "/workers/";
 
-
-  return (
-    <li
-      className={cn(
-        "flex justify-between my-2",
-        mutating ? "opacity-30 animate-pulse" : "",
-        deleting ? "text-destructive" : "",
-      )}
-    >
-      <div className="w-full">
-        <div>{worker.name}</div>
-      </div>
-      <Button variant={"link"} asChild>
-        <Link href={ basePath + "/" + worker.id }>
-          Edit
-        </Link>
-      </Button>
-    </li>
-  );
-};
 
 const EmptyState = ({ openModal }: { openModal: TOpenModal }) => {
   return (

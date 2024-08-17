@@ -71,7 +71,7 @@ export const authOptions: NextAuthOptions = {
           return user;
         }
 
-        const isValidPassword = await compareHashedData(credentials?.password!,dbUser.password)
+        const isValidPassword = await compareHashedData(credentials?.password!,dbUser.password!)
 
         if(!isValidPassword) throw Error("invalid password")
          

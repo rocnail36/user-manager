@@ -73,7 +73,7 @@ model Worker {
   id          String   @id @default(cuid())
   name        String
   salary      Float
-  ci          Int
+  ci          Int     @unique
   adress      String
   phoneNumber String
   userId      String
