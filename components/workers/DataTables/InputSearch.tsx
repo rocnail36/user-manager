@@ -19,6 +19,7 @@ export default function InputSearch<TData>({ table }: InputProps<TData>) {
    const [fiel, setField] = useState("name") 
 
    const HandleChange = (e:string) => {
+       table.getColumn(fiel)?.setFilterValue("")
        setField(e)
    }
 

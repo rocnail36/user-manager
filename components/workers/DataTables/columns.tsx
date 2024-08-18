@@ -69,15 +69,12 @@ const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
   })
 
 
-  
-
-  
 
   return (
     <div  className={twMerge("flex flex-col",className)}>
          {!Isreport && (
           <div className="flex items-center py-4">
-           <div className="flex justify-between">
+           <div className="flex justify-between gap-4">
            <InputSearch table={table}/> <Link href={"/workers/report"}><Button>see Report</Button></Link>
            </div>
       </div>

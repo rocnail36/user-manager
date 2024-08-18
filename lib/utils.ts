@@ -21,10 +21,9 @@ export type OptimisticAction<T> = {
 
 
 
-export function obtenerUltimos7Dias(salaryTendency:{[key:string]:number}) {
+export function convertSalaryToDays(salaryTendency:{[key:string]:number}) {
     
   const salaryTendencyToarray = Object.entries(salaryTendency)
-  console.log(salaryTendencyToarray)
   const chartData: { day: string; salary: number }[] = [];
   const nombresDias = [
     "Domingo",

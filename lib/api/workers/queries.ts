@@ -2,7 +2,7 @@ import { db } from "@/lib/db/index";
 import { getUserAuth } from "@/lib/auth/utils";
 import { type WorkerId, workerIdSchema } from "@/lib/db/schema/workers";
 import { subDays, startOfDay } from "date-fns";
-import { obtenerUltimos7Dias } from "@/lib/utils";
+import { convertSalaryToDays } from "@/lib/utils";
 
 export const getWorkers = async () => {
   const { session } = await getUserAuth();
@@ -53,7 +53,7 @@ export const getSalaryTendencyByDays = async () => {
   const tenDaysAgo = subDays(new Date(), 10);
 
   const users = await db.worker.findMany({
-    select:{salary:true,createdAt:true},
+    select: { salary: true, createdAt: true },
     where: {
       createdAt: {
         gte: startOfDay(tenDaysAgo),
@@ -61,25 +61,18 @@ export const getSalaryTendencyByDays = async () => {
       userId: session.session?.user.id,
     },
     orderBy: {
-      createdAt: "asc",
+      createdAt: "desc",
     },
   });
 
-  const groupedUsers = users.reduce((acc, user) => {
-    const date = user.createdAt.toISOString().split('T')[0];
+  const salaryByDates = users.reduce((acc, user) => {
+    const date = user.createdAt.toISOString().split("T")[0];
     if (!acc[date]) {
       acc[date] = 0;
     }
     acc[date] += user.salary;
     return acc;
-  }, {} as { [key:string]:number} );
+  }, {} as { [key: string]: number });
 
-
-  
- 
-  return obtenerUltimos7Dias(groupedUsers)
-
+  return convertSalaryToDays(salaryByDates);
 };
-
-
-

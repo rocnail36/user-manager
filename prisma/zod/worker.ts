@@ -5,7 +5,7 @@ export const workerSchema = z.object({
   id: z.string(),
   name: z.string(),
   salary: z.number(),
-  ci: z.number().int(),
+  ci: z.number({message:"numero invalido"}).int("numero invalido"),
   adress: z.string(),
   phoneNumber: z.string(),
   userId: z.string(),

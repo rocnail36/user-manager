@@ -5,7 +5,7 @@ import { Adapter } from "next-auth/adapters";
 import { redirect } from "next/navigation";
 import { env } from "@/lib/env.mjs";
 import Credentials from "next-auth/providers/credentials";
-import { compareHashedData, hashData, } from "../bcrypt";
+import { compareHashedData, hashData } from "../bcrypt";
 
 declare module "next-auth" {
   interface Session {
@@ -27,6 +27,9 @@ export type AuthSession = {
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
+  pages: {
+    signIn:"/sign-in"
+  },
   session: { strategy: "jwt" },
   callbacks: {
     jwt: ({ token, user }) => {
@@ -51,34 +54,42 @@ export const authOptions: NextAuthOptions = {
       authorize: async (credentials) => {
         let user = null;
 
-        const dbUser = await db.user.findUnique({
-          where: {
-            email: credentials?.email,
-          },
-        });
-
-        if (!dbUser) {
-          const password = await hashData(credentials?.password!);
-         console.log("gola")
-          user = await db.user.create({
-            data: {
+        try {
+          const dbUser = await db.user.findUnique({
+            where: {
               email: credentials?.email,
-              password,
             },
-            
           });
-          // return user object with their profile data
-          return user;
+
+          if (!dbUser) {
+            const password = await hashData(credentials?.password!);
+            console.log("gola");
+            user = await db.user.create({
+              data: {
+                email: credentials?.email,
+                password,
+              },
+            });
+            // return user object with their profile data
+            return user;
+          }
+
+          const isValidPassword = await compareHashedData(
+            credentials?.password!,
+            dbUser.password!
+          );
+
+          if (!isValidPassword) throw Error("invalid password");
+
+          return dbUser;
+        } catch (error) {
+     
+        
+          throw new Error("ha habido un error")
         }
-
-        const isValidPassword = await compareHashedData(credentials?.password!,dbUser.password!)
-
-        if(!isValidPassword) throw Error("invalid password")
-         
-        return dbUser
-          
-
       },
+
+
     }),
   ],
 };
