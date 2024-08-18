@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import Loading from "@/app/loading";
+import Loading from "@/app/[lang]/loading";
 import WorkerList from "@/components/workers/WorkerList";
 import { getWorkers } from "@/lib/api/workers/queries";
 

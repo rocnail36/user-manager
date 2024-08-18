@@ -7,7 +7,7 @@ import { checkAuth } from "@/lib/auth/utils";
 
 
 import { BackButton } from "@/components/shared/BackButton";
-import Loading from "@/app/loading";
+import Loading from "@/app/[lang]/loading";
 
 
 export const revalidate = 0;

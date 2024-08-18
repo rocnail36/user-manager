@@ -1,7 +1,7 @@
 "use client";
 
 import { useOptimistic, useState } from "react";
-import { TAddOptimistic } from "@/app/(app)/workers/useOptimisticWorkers";
+import { TAddOptimistic } from "@/app/[lang]/(app)/workers/useOptimisticWorkers";
 import { type Worker } from "@/lib/db/schema/workers";
 import { cn } from "@/lib/utils";
 

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { type Worker, CompleteWorker } from "@/lib/db/schema/workers";
 import Modal from "@/components/shared/Modal";
 
-import { useOptimisticWorkers } from "@/app/(app)/workers/useOptimisticWorkers";
+import { useOptimisticWorkers } from "@/app/[lang]/(app)/workers/useOptimisticWorkers";
 import { Button } from "@/components/ui/button";
 import WorkerForm from "./WorkerForm";
 import { PlusIcon } from "lucide-react";

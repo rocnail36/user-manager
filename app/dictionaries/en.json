@@ -1,0 +1,18 @@
+{
+    "landing": {
+        "button": "Sign in"
+    },
+    "auth":{
+        "emailInput": {
+            "tile": "Email",
+            "error": "Invalid Email.",
+            "placeHolder": "Example@gmail.com"
+        },
+        "passWordInput": {
+             "title": "Password",
+             "error": "Password Password must be at leats two characters.",
+             "placeHolder": "xxxx"
+        },
+        "toastMessage": "User or password invalid"
+    }
+  }

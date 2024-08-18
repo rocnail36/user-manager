@@ -17,19 +17,24 @@ import { Input } from "@/components/ui/input"
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 
  
 
 
-const formSchema = z.object({
-  email: z.string({message:"Email is required."}).email("Invalid email."),
-  password: z.string({message:"Password is required."}).min(2,"Password must be at leats two characters.")
-})
+
 
 const Page = () => {
 
   const router = useRouter()
+  const {lang} = useContext(LanguageContext)
+
+  const formSchema = z.object({
+    email: z.string().email(lang?.auth.emailInput.error),
+    password: z.string().min(2,lang?.auth.passWordInput.error!)
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,7 +48,7 @@ const Page = () => {
    
     const result = await signIn("credentials", {...values ,redirect:false })
     if(!result?.ok){
-     return toast.warning("User or invalid password")
+     return toast.warning(lang?.auth.toastMessage)
     }
    
     router.push("/dashboard")
@@ -61,9 +66,9 @@ const Page = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{lang?.auth.emailInput.tile}</FormLabel>
               <FormControl>
-                <Input placeholder="example@gmail.com" {...field} />
+                <Input placeholder={lang?.auth.emailInput.placeHolder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -74,9 +79,9 @@ const Page = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{lang?.auth.passWordInput.title}</FormLabel>
               <FormControl>
-                <Input placeholder="xxxx"  type="password" {...field} />
+                <Input placeholder={lang?.auth.passWordInput.placeHolder}  type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

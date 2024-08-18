@@ -4,8 +4,14 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
+import { getDictionary, Locale } from "../dictionaries/dictionaries";
 
-export default function LandingPage() {
+
+
+export default async function LandingPage({params:{lang}}:{params:{lang:Locale}}) {
+ 
+  const d = await getDictionary(lang)
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -22,9 +28,9 @@ export default function LandingPage() {
           </Link>
           <Link
             className="text-sm font-medium hover:underline underline-offset-4"
-            href="/sign-in"
+            href={`${lang}/sign-in`}
           >
-            Sign In
+            {d.landing.button}
           </Link>
         </nav>
       </header>
@@ -36,7 +42,8 @@ export default function LandingPage() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    The complete platform <br />
+                     <br />
+                     
                     for building the Web
                   </h1>
                   <p className="max-w-[600px] text-neutral-500 md:text-xl dark:text-neutral-400">

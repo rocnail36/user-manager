@@ -1,0 +1,18 @@
+{
+    "landing": {
+        "button": "Iniciar sesión"
+    },
+    "auth": {
+        "emailInput": {
+            "tile": "Correo electrónico",
+            "error": "Correo electrónico inválido.",
+            "placeHolder": "Ejemplo@gmail.com"
+        },
+        "passWordInput": {
+            "title": "Contraseña",
+            "error": "La contraseña debe tener al menos dos caracteres.",
+            "placeHolder": "xxxx"
+        },
+        "toastMessage": "Usuario o contraseña inválidos"
+    }
+}

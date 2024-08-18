@@ -10,7 +10,7 @@ const baseSchema = workerSchema.omit(timestamps)
 export const insertWorkerSchema = baseSchema.omit({ id: true });
 export const insertWorkerParams = baseSchema.extend({
   salary: z.coerce.number(),
-  ci: z.coerce.number(),
+  ci: z.coerce.number({message:"error"}),
 }).omit({ 
   id: true,
   userId: true

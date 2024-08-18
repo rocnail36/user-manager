@@ -13,7 +13,7 @@ import { columnsWorkersReport } from "@/components/workers/DataTables/dataTables
 import GeneratePdf from "@/components/pdf/GeneratePdf";
 import { Fallback } from "@radix-ui/react-avatar";
 import { Report } from "@/components/workers/report/Report";
-import Loading from "@/app/loading";
+import Loading from "@/app/[lang]/loading";
 
 const page = async () => {
 
