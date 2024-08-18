@@ -1,17 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
 import { AlignRight } from "lucide-react";
 import { defaultLinks } from "@/config/nav";
+import { createContext } from "vm";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const {d} = useContext(LanguageContext)
   return (
     <div className="md:hidden border-b mb-4 pb-2 w-full">
       <nav className="flex justify-between w-full items-center">
@@ -23,7 +26,7 @@ export default function Navbar() {
       {open ? (
         <div className="my-4 p-4 bg-muted">
           <ul className="space-y-2">
-            {defaultLinks.map((link) => (
+            {defaultLinks(d!).map((link) => (
               <li key={link.title} onClick={() => setOpen(false)} className="">
                 <Link
                   href={link.href}

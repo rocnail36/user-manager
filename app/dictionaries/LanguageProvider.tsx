@@ -4,16 +4,16 @@ import {  Locale } from "./dictionaries";
 import { Dictionary } from "./types";
 
 
-export const LanguageContext = createContext<{lang:Dictionary | undefined}>({} as {lang:Dictionary})
+export const LanguageContext = createContext<{d:Dictionary | undefined}>({} as {d:Dictionary})
 
 
-export const LanguageProvider = ({children,lang}:{children:React.ReactNode,lang:Dictionary}) => {
+export const LanguageProvider = ({children,lang:d}:{children:React.ReactNode,lang:Dictionary}) => {
 
    
 
 return(
     <LanguageContext.Provider  
-    value={{lang}}>
+    value={{d}}>
             {children}
     </LanguageContext.Provider>
 )

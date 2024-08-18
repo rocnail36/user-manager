@@ -7,6 +7,8 @@ import { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { defaultLinks, additionalLinks } from "@/config/nav";
+import { useContext } from "react";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 export interface SidebarLink {
   title: string;
@@ -15,11 +17,12 @@ export interface SidebarLink {
 }
 
 const SidebarItems = () => {
+  const {d} = useContext(LanguageContext)
   return (
     <>
-      <SidebarLinkGroup links={defaultLinks} />
+      <SidebarLinkGroup links={defaultLinks(d!)} />
       {additionalLinks.length > 0
-        ? additionalLinks.map((l) => (
+        ? additionalLinks(d!).map((l) => (
             <SidebarLinkGroup
               links={l.links}
               title={l.title}

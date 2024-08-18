@@ -2,17 +2,111 @@
     "landing": {
         "button": "Sign in"
     },
-    "auth":{
+    "auth": {
         "emailInput": {
-            "tile": "Email",
+            "title": "Email",
             "error": "Invalid Email.",
-            "placeHolder": "Example@gmail.com"
+            "placeHolder": "example@gmail.com"
         },
         "passWordInput": {
              "title": "Password",
-             "error": "Password Password must be at leats two characters.",
+             "error": "Password must be at least two characters.",
              "placeHolder": "xxxx"
         },
-        "toastMessage": "User or password invalid"
+        "toastMessage": "User or password invalid.",
+        "submit": "Sign in"
+    },
+    "navBar": {
+        "home": "Home",
+        "account": "Account",
+        "workers": "Workers",
+        "settings": "Settings",
+        "entities": "Entities"
+    },
+    "home": {
+        "as": "Signed in as",
+        "signOut": "Sign Out"
+    },
+    "account": {
+        "title": "Account",
+        "inputName": {
+            "title": "Your Name",
+            "description": "Please enter your full name, or a display name you are comfortable with.",
+            "help": "64 characters maximum",
+            "button": "Update Name",
+            "toast": {
+                "error": "Name must be longer than 3 characters.",
+                "successful": "Name updated"
+            }
+        },
+        "inputEmail": {
+            "title": "Your Email",
+            "description": "Please enter the email address you want to use with your account.",
+            "help": "We will email you to verify the change.",
+            "button": "Update Email"
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "subTitle": "Appearance",
+        "text": "Customize the appearance of the app. Automatically switch between day and night themes.",
+        "modes": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+        }
+    },
+    "workers": {
+        "title": "Workers",
+        "emptyState": {
+            "title": "No Workers",
+            "text": "Get started by creating a new worker.",
+            "button": "New Worker"
+        },
+        "modal": {
+            "titleCreate": "Create",
+            "titleUpdate": "Edit",
+            "inputName": {
+                "title": "Name",
+                "error": "Name is required."
+             },
+            "inputAddress": {
+                "title": "Address",
+                "error": "Address is required."
+            },
+            "inputSalary": {
+                "title": "Salary",
+                "error": "Salary must be a number."
+            },
+            "inputCi": {
+                "title": "C.I",
+                "error": "C.I must be a number."
+            },
+            "inputPhoneNumber": {
+                "title": "Phone number",
+                "error": "Must be a valid phone number."
+            }
+        },
+        "pdf": {
+            "button": "Save as PDF"
+        },
+        "report": {
+            "title": "Report",
+            "salaryTendency": "Salary tendency last 7 days",
+            "salaryAverage": "Salary average",
+            "bestSalary": "Top 10 workers with best salary"
+        },
+        "days": {
+            "sunday": "Sunday",
+            "monday": "Monday",
+            "tuesday": "Tuesday",
+            "wednesday": "Wednesday",
+            "thursday": "Thursday",
+            "friday": "Friday",
+            "saturday": "Saturday"
+        },
+        "table": {
+            
+        }
     }
-  }
+}

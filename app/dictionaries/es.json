@@ -4,15 +4,106 @@
     },
     "auth": {
         "emailInput": {
-            "tile": "Correo electrónico",
-            "error": "Correo electrónico inválido.",
-            "placeHolder": "Ejemplo@gmail.com"
+            "title": "Correo electrónico",
+            "error": "Correo electrónico no válido.",
+            "placeHolder": "ejemplo@gmail.com"
         },
         "passWordInput": {
-            "title": "Contraseña",
-            "error": "La contraseña debe tener al menos dos caracteres.",
-            "placeHolder": "xxxx"
+             "title": "Contraseña",
+             "error": "La contraseña debe tener al menos dos caracteres.",
+             "placeHolder": "xxxx"
         },
-        "toastMessage": "Usuario o contraseña inválidos"
+        "toastMessage": "Usuario o contraseña inválidos.",
+        "submit": "Iniciar sesión"
+    },
+    "navBar": {
+        "home": "Inicio",
+        "account": "Cuenta",
+        "workers": "Trabajadores",
+        "settings": "Configuración",
+        "entities": "Entidades"
+    },
+    "home": {
+        "as": "Conectado como",
+        "signOut": "Cerrar sesión"
+    },
+    "account": {
+        "title": "Cuenta",
+        "inputName": {
+            "title": "Tu nombre",
+            "description": "Por favor ingresa tu nombre completo, o un nombre que te sientas cómodo utilizando.",
+            "help": "Máximo 64 caracteres",
+            "button": "Actualizar nombre",
+            "toast": {
+                "error": "El nombre debe tener más de 3 caracteres.",
+                "successful": "Nombre actualizado"
+            }
+        },
+        "inputEmail": {
+            "title": "Tu correo electrónico",
+            "description": "Por favor ingresa la dirección de correo electrónico que deseas usar con tu cuenta.",
+            "help": "Te enviaremos un correo para verificar el cambio.",
+            "button": "Actualizar correo electrónico"
+        }
+    },
+    "settings": {
+        "title": "Configuración",
+        "subTitle": "Apariencia",
+        "text": "Personaliza la apariencia de la aplicación. Cambia automáticamente entre temas de día y de noche.",
+        "modes": {
+            "light": "Claro",
+            "dark": "Oscuro",
+            "system": "Sistema"
+        }
+    },
+    "workers": {
+        "title": "Trabajadores",
+        "emptyState": {
+            "title": "No hay trabajadores",
+            "text": "Comienza creando un nuevo trabajador.",
+            "button": "Nuevo trabajador"
+        },
+        "modal": {
+            "titleCreate": "Crear",
+            "titleUpdate": "Editar",
+            "inputName": {
+                "title": "Nombre",
+                "error": "El nombre es obligatorio."
+            },
+            "inputAddress": {
+                "title": "Dirección",
+                "error": "La dirección es obligatoria."
+            },
+            "inputSalary": {
+                "title": "Salario",
+                "error": "El salario debe ser un número."
+            },
+            "inputCi": {
+                "title": "C.I",
+                "error": "La C.I debe ser un número."
+            },
+            "inputPhoneNumber": {
+                "title": "Número de teléfono",
+                "error": "Debe ser un número de teléfono válido."
+            }
+        },
+        "pdf": {
+            "button": "Guardar como PDF"
+        },
+        "report": {
+            "title": "Informe",
+            "salaryTendency": "Tendencia salarial últimos 7 días",
+            "salaryAverage": "Promedio salarial",
+            "bestSalary": "Top 10 trabajadores con mejor salario"
+        },
+        "days": {
+            "sunday": "Domingo",
+            "monday": "Lunes",
+            "tuesday": "Martes",
+            "wednesday": "Miércoles",
+            "thursday": "Jueves",
+            "friday": "Viernes",
+            "saturday": "Sábado"
+        }
     }
 }

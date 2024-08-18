@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "../dictionaries/LanguageProvider";
 import { getDictionary, Locale } from "../dictionaries/dictionaries";
+import { Dictionary } from "../dictionaries/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +23,12 @@ export default async function RootLayout({
 
  const d  = await getDictionary(lang)
           
+ 
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <LanguageProvider lang={d}>
+        <LanguageProvider lang={d as Dictionary}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>{children}</ThemeProvider>
       </LanguageProvider>
       </body>

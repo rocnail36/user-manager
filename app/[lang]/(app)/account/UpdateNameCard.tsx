@@ -3,10 +3,12 @@ import { AccountCard, AccountCardFooter, AccountCardBody } from "./AccountCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { useTransition } from "react";
+import { useContext, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 export default function UpdateNameCard({ name }: { name: string }) {
+  const {d} = useContext(LanguageContext)
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -34,17 +36,17 @@ export default function UpdateNameCard({ name }: { name: string }) {
   return (
     <AccountCard
       params={{
-        header: "Your Name",
+        header: d?.account.inputName.title!,
         description:
-          "Please enter your full name, or a display name you are comfortable with.",
+          d?.account.inputName.help!,
       }}
     >
       <form onSubmit={handleSubmit}>
         <AccountCardBody>
           <Input defaultValue={name ?? ""} name="name"  />
         </AccountCardBody>
-        <AccountCardFooter description="64 characters maximum">
-          <Button >Update Name</Button>
+        <AccountCardFooter description={d?.account.inputName.help!}>
+          <Button >{d?.account.inputName.button}</Button>
         </AccountCardFooter>
       </form>
     </AccountCard>

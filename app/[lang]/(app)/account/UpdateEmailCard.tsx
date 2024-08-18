@@ -2,11 +2,13 @@ import { AccountCard, AccountCardFooter, AccountCardBody } from "./AccountCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { useTransition } from "react";
+import { useContext, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 export default function UpdateEmailCard({ email }: { email: string }) {
   const [isPending, startTransition] = useTransition();
+  const {d} = useContext(LanguageContext)
   const router = useRouter();
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -34,17 +36,17 @@ export default function UpdateEmailCard({ email }: { email: string }) {
   return (
     <AccountCard
       params={{
-        header: "Your Email",
+        header: d?.account.inputEmail.title!,
         description:
-          "Please enter the email address you want to use with your account.",
+          d?.account.inputEmail.description!,
       }}
     >
       <form onSubmit={handleSubmit}>
         <AccountCardBody>
           <Input defaultValue={email ?? ""} name="email" disabled={true} />
         </AccountCardBody>
-        <AccountCardFooter description="We will email vou to verify the change.">
-          <Button disabled={true}>Update Email</Button>
+        <AccountCardFooter description={d?.account.inputEmail.help!}>
+          <Button disabled={true}>{d?.account.inputEmail.button}</Button>
         </AccountCardFooter>
       </form>
     </AccountCard>

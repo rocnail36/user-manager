@@ -29,11 +29,11 @@ import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 const Page = () => {
 
   const router = useRouter()
-  const {lang} = useContext(LanguageContext)
+  const {d} = useContext(LanguageContext)
 
   const formSchema = z.object({
-    email: z.string().email(lang?.auth.emailInput.error),
-    password: z.string().min(2,lang?.auth.passWordInput.error!)
+    email: z.string().email(d?.auth.emailInput.error),
+    password: z.string().min(2,d?.auth.passWordInput.error!)
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,7 +48,7 @@ const Page = () => {
    
     const result = await signIn("credentials", {...values ,redirect:false })
     if(!result?.ok){
-     return toast.warning(lang?.auth.toastMessage)
+     return toast.warning(d?.auth.toastMessage)
     }
    
     router.push("/dashboard")
@@ -66,9 +66,9 @@ const Page = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{lang?.auth.emailInput.tile}</FormLabel>
+              <FormLabel>{d?.auth.emailInput.title}</FormLabel>
               <FormControl>
-                <Input placeholder={lang?.auth.emailInput.placeHolder} {...field} />
+                <Input placeholder={d?.auth.emailInput.placeHolder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -79,9 +79,9 @@ const Page = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{lang?.auth.passWordInput.title}</FormLabel>
+              <FormLabel>{d?.auth.passWordInput.title}</FormLabel>
               <FormControl>
-                <Input placeholder={lang?.auth.passWordInput.placeHolder}  type="password" {...field} />
+                <Input placeholder={d?.auth.passWordInput.placeHolder}  type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
