@@ -2,6 +2,7 @@ import { db } from "@/lib/db/index";
 import { getUserAuth } from "@/lib/auth/utils";
 import { type WorkerId, workerIdSchema } from "@/lib/db/schema/workers";
 import { subDays, startOfDay } from "date-fns";
+import { obtenerUltimos7Dias } from "@/lib/utils";
 
 export const getWorkers = async () => {
   const { session } = await getUserAuth();
@@ -38,7 +39,7 @@ export const getWorkersBestSalary = async () => {
       userId: session.session?.user.id,
     },
     orderBy: {
-      salary: "asc",
+      salary: "desc",
     },
     take: 10,
   });
@@ -72,7 +73,13 @@ export const getSalaryTendencyByDays = async () => {
     acc[date] += user.salary;
     return acc;
   }, {} as { [key:string]:number} );
+
+
+  
  
-  return groupedUsers
+  return obtenerUltimos7Dias(groupedUsers)
 
 };
+
+
+

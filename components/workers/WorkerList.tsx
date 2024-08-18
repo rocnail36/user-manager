@@ -12,7 +12,7 @@ import { useOptimisticWorkers } from "@/app/(app)/workers/useOptimisticWorkers";
 import { Button } from "@/components/ui/button";
 import WorkerForm from "./WorkerForm";
 import { PlusIcon } from "lucide-react";
-import { columns } from "./DataTables/dataTables";
+import { columnsAllWorkers } from "./DataTables/dataTables";
 import { DataTable } from "./DataTables/columns";
 
 
@@ -61,7 +61,7 @@ export default function WorkerList({
         <EmptyState openModal={openModal} />
       ) : (
         <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={optimisticWorkers} />
+        <DataTable columns={columnsAllWorkers} data={optimisticWorkers} />
       </div>
       )}
     </div>

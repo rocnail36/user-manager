@@ -20,7 +20,7 @@ const filterFn = (row:Row<Worker>,columnId:string,filterValue:string) => {
 }
 
 
-export const columns: ColumnDef<CompleteWorker>[] = [
+export const columnsAllWorkers: ColumnDef<CompleteWorker>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -90,5 +90,31 @@ export const columns: ColumnDef<CompleteWorker>[] = [
     }
   },
   
+]
+
+
+
+export const columnsWorkersReport: ColumnDef<CompleteWorker>[] = [
+  {
+    accessorKey: "name",
+    header: "Name"
+  },
+  {
+    accessorKey: "adress",
+    header: "Adress",
+  },
+  {
+    accessorKey:"ci",
+    header:"C.I",
+  },
+  {
+    accessorKey:"phoneNumber",
+    header:"Phone"
+  },
+  {
+    accessorKey: "salary",
+    header:"Salary"
+  },
+ 
 ]
 

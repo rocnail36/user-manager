@@ -1,10 +1,14 @@
-import React from 'react'
+import Loading from '@/app/loading'
+import React, { Suspense } from 'react'
 
 const layout = ({children,modal}:{children:React.ReactNode,modal:React.ReactNode}) => {
   return (
     <div>{
     children}
-    {modal}</div>
+    <Suspense fallback={<Loading/>}>
+    {modal}
+    </Suspense>
+    </div>
   )
 }
 

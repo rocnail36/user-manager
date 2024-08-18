@@ -30,17 +30,22 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import InputSearch from "./InputSearch"
 import Link from "next/link"
+import { twMerge } from "tailwind-merge"
 
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data: TData[],
+  Isreport?: boolean,
+  className?:string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  className,
+  Isreport
 }: DataTableProps<TData, TValue>) {
 
 const [sorting, setSorting] = useState<SortingState>([])
@@ -69,12 +74,14 @@ const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
   
 
   return (
-    <div  className="min-h-[600px] flex flex-col ">
+    <div  className={twMerge("flex flex-col",className)}>
+         {!Isreport && (
           <div className="flex items-center py-4">
-          <div className="flex justify-between">
-          <InputSearch table={table}/> <Link href={"/workers/report"}><Button>see Report</Button></Link>
-          </div>
+           <div className="flex justify-between">
+           <InputSearch table={table}/> <Link href={"/workers/report"}><Button>see Report</Button></Link>
+           </div>
       </div>
+         )}
         <div className="rounded-md border">
       <Table>
         <TableHeader>
@@ -122,24 +129,26 @@ const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
       </Table>
       </div>
 
-      <div className="flex items-center justify-end space-x-2 py-4 mt-auto">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+     {!Isreport && (
+         <div className="flex items-center justify-end space-x-2 py-4 mt-auto">
+         <Button
+           variant="outline"
+           size="sm"
+           onClick={() => table.previousPage()}
+           disabled={!table.getCanPreviousPage()}
+         >
+           Previous
+         </Button>
+         <Button
+           variant="outline"
+           size="sm"
+           onClick={() => table.nextPage()}
+           disabled={!table.getCanNextPage()}
+         >
+           Next
+         </Button>
+       </div>
+     )}
           
 
     </div>

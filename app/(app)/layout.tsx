@@ -18,9 +18,7 @@ export default async function AppLayout({
 <main className="flex-1 md:p-8 pt-2 p-8 overflow-y-auto">
 <Navbar />
 {children}
-{
-  modal
-}
+
 </main>
 </div></NextAuthProvider>
 
