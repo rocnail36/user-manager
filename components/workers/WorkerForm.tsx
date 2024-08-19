@@ -66,7 +66,8 @@ const WorkerForm = ({
       router.refresh();
       postSuccess && postSuccess();
       toast.success(`Worker ${action}d!`);
-      if (action === "delete") router.push(backpath);
+      console.log(backpath)
+      if (action === "delete") router.push(`/${backpath}`);
     }
   };
 

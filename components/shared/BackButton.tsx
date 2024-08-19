@@ -11,9 +11,11 @@ export function useBackPath(currentResource: string) {
   const pathname = usePathname();
   const segmentCount = pathname.slice(1).split("/");
   const backPath =
-    segmentCount.length > 2
-      ? pathname.slice(0, pathname.indexOf(currentResource) - 1)
-      : pathname.slice(0, pathname.indexOf(segmentCount[1]));
+    segmentCount.length > 3
+      ? pathname.slice(1, pathname.indexOf(currentResource) )
+      : pathname.slice(pathname.lastIndexOf(segmentCount[1]), pathname.indexOf(segmentCount[2]));
+
+      console.log("aqui esta",backPath)
   return backPath;
 }
 
