@@ -47,8 +47,12 @@ const Page = () => {
  async function onSubmit(values: z.infer<typeof formSchema>) {
    
     const result = await signIn("credentials", {...values ,redirect:false })
+    console.log(result?.error)
+    if(result?.error == "verify email"){
+      return toast.warning(d?.auth.toastMessage.veifyEmail)
+    }
     if(!result?.ok){
-     return toast.warning(d?.auth.toastMessage)
+     return toast.warning(d?.auth.toastMessage.invaliduser)
     }
    
     router.push("/dashboard")

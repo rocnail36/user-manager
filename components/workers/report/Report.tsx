@@ -1,25 +1,26 @@
-import GeneratePdf from '@/components/pdf/GeneratePdf'
 import React from 'react'
 import Chart from './chart'
 import { DataTable } from '../DataTables/columns'
 import { twMerge } from 'tailwind-merge'
-import { getSalaryTendencyByDays, GetWorkerAvgSalary, getWorkersBestSalary } from '@/lib/api/workers/queries'
+import { getSalaryTendencyByDays, getWorkerAvgSalary, getWorkersBestSalary } from '@/lib/api/workers/queries'
 import { ChartConfig } from '@/components/ui/chart'
-import { columnsWorkersReport } from '../DataTables/dataTables'
+import { Dictionary } from '@/app/dictionaries/types'
+import { columnsWorkerReport } from '../DataTables/dataTableReport'
+import { ColumnDef } from '@tanstack/react-table'
+import { CompleteUser } from '@/prisma/zod'
+import { Worker } from '@/lib/db/schema/workers'
+export const Report = async({d}:{d:Dictionary}) => {
 
-export const Report = async() => {
+  const salaryTendencyPromise = getSalaryTendencyByDays();
+  const bestWorkerSalaryPromise = getWorkersBestSalary();
+  const averageWorkerSalaryPromise = getWorkerAvgSalary();
 
-    const promise1 = getSalaryTendencyByDays();
-    const promise2 = getWorkersBestSalary();
-    const promise3 = GetWorkerAvgSalary();
-  
-    const [salaryTendency, BestWorkerSalary, SalaryAvg] = await Promise.all([
-      promise1,
-      promise2,
-      promise3,
-    ]);
-  
-    
+  const [salaryTendency, bestWorkerSalary, averageWorkerSalary] = await Promise.all([
+    salaryTendencyPromise,
+    bestWorkerSalaryPromise,
+    averageWorkerSalaryPromise,
+  ]);
+
   
     const chartConfig = {
       salary: {
@@ -29,27 +30,27 @@ export const Report = async() => {
     } satisfies ChartConfig;
   
     const chartData = salaryTendency
-
+    const columns =  columnsWorkerReport(d)
 
   return (
     
       
     <div className="px-4 py-8 bg-background">
-    <h1 className="mb-4">Report</h1>
+    <h1 className="mb-4">{d.workers.report.title}</h1>
       <div className="px-12">
         <div className="mb-12">
-          <h2 className='text-xl'> salary tendency last 7 days</h2>
+          <h2 className='text-xl'>{d.workers.report.salaryTendency}</h2>
           <Chart chartConfig={chartConfig} chartData={chartData} />
         </div>
 
         <div className="flex-col mb-4">
-          <h2 className="text-xl mb-2">Salary average</h2>
+            <h2 className="text-xl mb-2">{d.workers.report.salaryAverage}</h2>
           <p className={twMerge("text-[56px] font-bold ")}>
-            ${SalaryAvg.salary?.toFixed(2)}
+            ${averageWorkerSalary.salary?.toFixed(2)}
           </p>
         </div>
-        <h2 className="text-xl mb-2">top 10 workers with best salary</h2>
-        <DataTable Isreport columns={columnsWorkersReport} data={BestWorkerSalary}/>
+        <h2 className="text-xl mb-2">{d.workers.report.bestSalary}</h2>
+        <DataTable Isreport columns={(columns as ColumnDef<Worker>[])} data={bestWorkerSalary}/>
       </div>
     </div>
     

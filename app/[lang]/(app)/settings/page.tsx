@@ -1,19 +1,21 @@
 "use client";
 
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import { useContext } from "react";
 
 export default function Page() {
   const { setTheme } = useTheme();
+  const {d} = useContext(LanguageContext)
   return (
     <div>
-      <h1 className="text-2xl font-semibold">Settings</h1>
+      <h1 className="text-2xl font-semibold">{d?.settings.title}</h1>
       <div className="space-y-4 my-4">
         <div>
-          <h3 className="text-lg font-medium">Appearance</h3>
+          <h3 className="text-lg font-medium">{d?.settings.subTitle}</h3>
           <p className="text-sm text-muted-foreground">
-            Customize the appearance of the app. Automatically switch between
-            day and night themes.
+            {d?.settings.text}
           </p>
         </div>
         <Button
@@ -40,7 +42,7 @@ export default function Page() {
               </div>
             </div>
             <span className="block w-full p-2 text-center font-normal">
-              Light
+            {d?.settings.modes.light}
             </span>
           </div>
         </Button>
@@ -68,7 +70,7 @@ export default function Page() {
               </div>
             </div>
             <span className="block w-full p-2 text-center font-normal">
-              Dark
+              {d?.settings.modes.dark}
             </span>
           </div>
         </Button>
@@ -96,7 +98,7 @@ export default function Page() {
               </div>
             </div>
             <span className="block w-full p-2 text-center font-normal">
-              System
+              {d?.settings.modes.system}
             </span>
           </div>
         </Button>

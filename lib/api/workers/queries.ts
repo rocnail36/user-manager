@@ -19,7 +19,7 @@ export const getWorkerById = async (id: WorkerId) => {
   return { worker: w };
 };
 
-export const GetWorkerAvgSalary = async () => {
+export const getWorkerAvgSalary = async () => {
   const session = await getUserAuth();
   const data = await db?.worker.aggregate({
     _avg: {

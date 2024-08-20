@@ -5,7 +5,7 @@
     "auth": {
         "emailInput": {
             "title": "Correo electrónico",
-            "error": "Correo electrónico no válido.",
+            "error": "Correo electrónico inválido.",
             "placeHolder": "ejemplo@gmail.com"
         },
         "passWordInput": {
@@ -13,7 +13,10 @@
              "error": "La contraseña debe tener al menos dos caracteres.",
              "placeHolder": "xxxx"
         },
-        "toastMessage": "Usuario o contraseña inválidos.",
+        "toastMessage": {
+            "veifyEmail": "te enviamos un mensaje a tu correo para autenticarlo",
+            "invaliduser":"Usuario o contraseña invalida"
+        },
         "submit": "Iniciar sesión"
     },
     "navBar": {
@@ -31,7 +34,7 @@
         "title": "Cuenta",
         "inputName": {
             "title": "Tu nombre",
-            "description": "Por favor ingresa tu nombre completo, o un nombre que te sientas cómodo utilizando.",
+            "description": "Por favor, ingresa tu nombre completo o un nombre para mostrar con el que te sientas cómodo.",
             "help": "Máximo 64 caracteres",
             "button": "Actualizar nombre",
             "toast": {
@@ -41,15 +44,15 @@
         },
         "inputEmail": {
             "title": "Tu correo electrónico",
-            "description": "Por favor ingresa la dirección de correo electrónico que deseas usar con tu cuenta.",
-            "help": "Te enviaremos un correo para verificar el cambio.",
+            "description": "Por favor, ingresa la dirección de correo que deseas usar con tu cuenta.",
+            "help": "Te enviaremos un correo electrónico para verificar el cambio.",
             "button": "Actualizar correo electrónico"
         }
     },
     "settings": {
         "title": "Configuración",
         "subTitle": "Apariencia",
-        "text": "Personaliza la apariencia de la aplicación. Cambia automáticamente entre temas de día y de noche.",
+        "text": "Personaliza la apariencia de la aplicación. Cambia automáticamente entre los temas de día y noche.",
         "modes": {
             "light": "Claro",
             "dark": "Oscuro",
@@ -57,10 +60,18 @@
         }
     },
     "workers": {
+        "fields":{
+            "name": "Nombre",
+            "email":"Correo",
+            "phoneNumber": "Telefono",
+            "address":"Dirección",
+            "ci": "C.I",
+            "salary":"Salario"
+        },
         "title": "Trabajadores",
         "emptyState": {
-            "title": "No hay trabajadores",
-            "text": "Comienza creando un nuevo trabajador.",
+            "title": "Sin trabajadores",
+            "text": "Empieza creando un nuevo trabajador.",
             "button": "Nuevo trabajador"
         },
         "modal": {
@@ -69,7 +80,7 @@
             "inputName": {
                 "title": "Nombre",
                 "error": "El nombre es obligatorio."
-            },
+             },
             "inputAddress": {
                 "title": "Dirección",
                 "error": "La dirección es obligatoria."
@@ -85,25 +96,48 @@
             "inputPhoneNumber": {
                 "title": "Número de teléfono",
                 "error": "Debe ser un número de teléfono válido."
+            },
+            "inputEdit":{
+                "title": "Editar usuario"
+            },
+            "buttons":{
+                "save": {
+                    "sav": "Guard",
+                    "ing": "ando",
+                    "e":"ar",
+                    "fullWord":"Guardado"         
+                },
+                "create":{
+                    "creat":"Crea",
+                    "ing": "ndo",
+                    "e": "r",
+                    "fullWord": "Crear"
+                }
             }
-        },
-        "pdf": {
-            "button": "Guardar como PDF"
         },
         "report": {
             "title": "Informe",
             "salaryTendency": "Tendencia salarial últimos 7 días",
             "salaryAverage": "Promedio salarial",
-            "bestSalary": "Top 10 trabajadores con mejor salario"
+            "bestSalary": "Top 10 trabajadores con mejor salario",
+            "seeReport": "Ver informe"
         },
-        "days": {
-            "sunday": "Domingo",
-            "monday": "Lunes",
-            "tuesday": "Martes",
-            "wednesday": "Miércoles",
-            "thursday": "Jueves",
-            "friday": "Viernes",
-            "saturday": "Sábado"
+        "inputSeach":{
+            "inputPlaceHolder":"filtrar por",
+            "selectPlaceHolder": "seleccionar campo" 
         }
+
+    },
+    "days": {
+        "sunday": "Domingo",
+        "monday": "Lunes",
+        "tuesday": "Martes",
+        "wednesday": "Miércoles",
+        "thursday": "Jueves",
+        "friday": "Viernes",
+        "saturday": "Sábado"
+    },
+    "pdf": {
+        "button": "Guardar como PDF"
     }
 }

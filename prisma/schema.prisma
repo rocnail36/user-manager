@@ -74,7 +74,7 @@ model Worker {
   name        String
   salary      Float
   ci          Int     @unique
-  adress      String
+  address      String
   phoneNumber String
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)

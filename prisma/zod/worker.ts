@@ -6,7 +6,7 @@ export const workerSchema = z.object({
   name: z.string(),
   salary: z.number(),
   ci: z.number().int(),
-  adress: z.string(),
+  address: z.string(),
   phoneNumber: z.string(),
   userId: z.string(),
   createdAt: z.date(),

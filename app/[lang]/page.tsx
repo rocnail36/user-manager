@@ -8,6 +8,7 @@ import { getDictionary, Locale } from "../dictionaries/dictionaries";
 
 
 
+
 export default async function LandingPage({params:{lang}}:{params:{lang:Locale}}) {
  
   const d = await getDictionary(lang)

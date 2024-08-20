@@ -3,9 +3,13 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { DefaultSession, getServerSession, NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import { redirect } from "next/navigation";
-import { env } from "@/lib/env.mjs";
 import Credentials from "next-auth/providers/credentials";
 import { compareHashedData, hashData } from "../bcrypt";
+import { Resend } from "resend";
+import { resend } from "../email";
+import { VerificationEmail } from "@/components/emails/verificationEmail";
+
+
 
 declare module "next-auth" {
   interface Session {
@@ -53,6 +57,7 @@ export const authOptions: NextAuthOptions = {
       },
       authorize: async (credentials) => {
         let user = null;
+        
 
         try {
           const dbUser = await db.user.findUnique({
@@ -63,29 +68,44 @@ export const authOptions: NextAuthOptions = {
 
           if (!dbUser) {
             const password = await hashData(credentials?.password!);
-            console.log("gola");
             user = await db.user.create({
               data: {
                 email: credentials?.email,
                 password,
               },
             });
+            
+
+            const data = await resend.emails.send({
+              from: "Acme <onboarding@resend.dev>",
+              to: [credentials?.email!],
+              subject: "Verificación de correo",
+              react: VerificationEmail({verificationLink: `${process.env.NEXTAUTH_URL}/verify-email/${user.id}`}),
+              text: "Email powered by Resend.",
+            });
+
+            
+          
+            
+            throw new Error("verify email")
             // return user object with their profile data
-            return user;
+          }
+
+          if(!dbUser.emailVerified){
+            throw new Error("verify email")
           }
 
           const isValidPassword = await compareHashedData(
             credentials?.password!,
             dbUser.password!
           );
-
+           
           if (!isValidPassword) throw Error("invalid password");
 
           return dbUser;
         } catch (error) {
-     
-        
-          throw new Error("ha habido un error")
+           console.log(error)
+          throw error
         }
       },
 

@@ -13,7 +13,10 @@
              "error": "Password must be at least two characters.",
              "placeHolder": "xxxx"
         },
-        "toastMessage": "User or password invalid.",
+        "toastMessage": {
+            "veifyEmail": "We sent you an email to very your email adreess",
+            "invalid user":"User or password invalid."
+        },
         "submit": "Sign in"
     },
     "navBar": {
@@ -57,6 +60,15 @@
         }
     },
     "workers": {
+
+        "fields":{
+            "name": "Name",
+            "email":"Email",
+            "phoneNumber": "phoneNumber",
+            "address":"Address",
+            "ci": "C.I",
+            "salary": "Salary"
+        },
         "title": "Workers",
         "emptyState": {
             "title": "No Workers",
@@ -85,28 +97,48 @@
             "inputPhoneNumber": {
                 "title": "Phone number",
                 "error": "Must be a valid phone number."
+            },
+            "inputEdit":{
+                "title": "Edit User"
+            },
+            "buttons":{
+                "save": {
+                    "sav": "Sav",
+                    "ing": "ing",
+                    "e":"e",
+                    "fullWord":"save"         
+                },
+                "create":{
+                    "creat":"Creat",
+                    "ing": "ing",
+                    "e": "e",
+                    "fullWord":"Create"
+                }
             }
-        },
-        "pdf": {
-            "button": "Save as PDF"
         },
         "report": {
             "title": "Report",
             "salaryTendency": "Salary tendency last 7 days",
             "salaryAverage": "Salary average",
-            "bestSalary": "Top 10 workers with best salary"
+            "bestSalary": "Top 10 workers with best salary",
+            "seeReport": "See Report"
         },
-        "days": {
-            "sunday": "Sunday",
-            "monday": "Monday",
-            "tuesday": "Tuesday",
-            "wednesday": "Wednesday",
-            "thursday": "Thursday",
-            "friday": "Friday",
-            "saturday": "Saturday"
-        },
-        "table": {
-            
+        "inputSeach":{
+            "inputPlaceHolder":"filter by",
+            "selectPlaceHolder": "select field" 
         }
+
+    },
+    "days": {
+        "sunday": "Sunday",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday"
+    },
+    "pdf": {
+        "button": "Save as PDF"
     }
 }

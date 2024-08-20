@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { useState, useTransition } from "react";
+import { useContext, useState, useTransition } from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -15,15 +15,14 @@ import { Label } from "@/components/ui/label";
 import { useBackPath } from "@/components/shared/BackButton";
 
 
-
-
-
-import { type Worker, insertWorkerParams } from "@/lib/db/schema/workers";
+import { insertWorkerParams, type Worker,  } from "@/lib/db/schema/workers";
 import {
   createWorkerAction,
   deleteWorkerAction,
   updateWorkerAction,
 } from "@/lib/actions/workers";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
+
 
 
 const WorkerForm = ({
@@ -41,8 +40,24 @@ const WorkerForm = ({
   addOptimistic?: TAddOptimistic;
   postSuccess?: () => void;
 }) => {
+
+
+const {d} = useContext(LanguageContext)
+
+const dModal = d?.workers.modal
+  
+const shemaParamWorKerForm = z.object({
+  id: z.string(),
+  name: z.string({message:dModal?.inputName.error}),
+  salary: z.coerce.number({message: dModal?.inputSalary.error}).nonnegative(dModal?.inputSalary.error),
+  ci: z.coerce.number({message: dModal?.inputCi.error}).nonnegative(dModal?.inputCi.error),
+  address: z.string({message:dModal?.inputAddress.error}),
+  phoneNumber: z.coerce.number({message:dModal?.inputPhoneNumber.error}).nonnegative(dModal?.inputPhoneNumber.error),
+  userId: z.string()
+}).omit({id:true,userId:true})
+
   const { errors, hasErrors, setErrors, handleChange } =
-    useValidatedForm<Worker>(insertWorkerParams);
+    useValidatedForm<Worker>(shemaParamWorKerForm);
   const editing = !!worker?.id;
   
   const [isDeleting, setIsDeleting] = useState(false);
@@ -50,7 +65,7 @@ const WorkerForm = ({
 
   const router = useRouter();
   const backpath = useBackPath("workers");
-
+  
 
   const onSuccess = (
     action: Action,
@@ -67,13 +82,13 @@ const WorkerForm = ({
       postSuccess && postSuccess();
       toast.success(`Worker ${action}d!`);
       console.log(backpath)
-      if (action === "delete") router.push(`/${backpath}`);
+      if (action === "delete") router.push(backpath);
     }
   };
 
   const handleSubmit = async (data: FormData) => {
     setErrors(null);
-
+    
     const payload = Object.fromEntries(data.entries());
     const workerParsed = await insertWorkerParams.safeParseAsync({  ...payload });
     if (!workerParsed.success) {
@@ -127,7 +142,7 @@ const WorkerForm = ({
             errors?.name ? "text-destructive" : "",
           )}
         >
-          Name
+          {dModal?.inputName.title}
         </Label>
         <Input
           type="text"
@@ -149,7 +164,7 @@ const WorkerForm = ({
             errors?.salary ? "text-destructive" : "",
           )}
         >
-          Salary
+          {dModal?.inputSalary.title}
         </Label>
         <Input
           type="text"
@@ -171,7 +186,7 @@ const WorkerForm = ({
             errors?.ci ? "text-destructive" : "",
           )}
         >
-          Ci
+          {dModal?.inputCi.title}
         </Label>
         <Input
           type="text"
@@ -190,21 +205,21 @@ const WorkerForm = ({
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.adress ? "text-destructive" : "",
+            errors?.address ? "text-destructive" : "",
           )}
         >
-          Adress
+          {dModal?.inputAddress.title}
         </Label>
         <Input
           type="text"
-          name="adress"
+          name="address"
           required
           
-          className={cn(errors?.adress ? "ring ring-destructive" : "")}
-          defaultValue={worker?.adress ?? ""}
+          className={cn(errors?.address ? "ring ring-destructive" : "")}
+          defaultValue={worker?.address ?? ""}
         />
-        {errors?.adress ? (
-          <p className="text-xs text-destructive mt-2">{errors.adress[0]}</p>
+        {errors?.address ? (
+          <p className="text-xs text-destructive mt-2">{errors.address[0]}</p>
         ) : (
           <div className="h-6" />
         )}
@@ -216,7 +231,7 @@ const WorkerForm = ({
             errors?.phoneNumber ? "text-destructive" : "",
           )}
         >
-          Phone Number
+          {dModal?.inputPhoneNumber.title}
         </Label>
         <Input
           type="text"
@@ -275,8 +290,11 @@ const SaveButton = ({
   errors: boolean;
 }) => {
   const { pending } = useFormStatus();
+  const  {d} = useContext(LanguageContext)
+  console.log(d,"aqui d")
   const isCreating = pending && editing === false;
   const isUpdating = pending && editing === true;
+  const dButtons = d?.workers.modal.buttons
   return (
     <Button
       type="submit"
@@ -285,8 +303,8 @@ const SaveButton = ({
       aria-disabled={isCreating || isUpdating || errors}
     >
       {editing
-        ? `Sav${isUpdating ? "ing..." : "e"}`
-        : `Creat${isCreating ? "ing..." : "e"}`}
+        ? `${dButtons?.save.sav}${isUpdating ? dButtons?.save.ing : dButtons?.save.e}`
+        : `${dButtons?.create.creat}${isCreating ? dButtons?.create.ing : dButtons?.create.e}`}
     </Button>
   );
 };

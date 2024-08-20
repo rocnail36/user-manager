@@ -16,7 +16,7 @@ export function useBackPath(currentResource: string) {
       : pathname.slice(pathname.lastIndexOf(segmentCount[1]), pathname.indexOf(segmentCount[2]));
 
       console.log("aqui esta",backPath)
-  return backPath;
+  return "/" + backPath;
 }
 
 export function BackButton({
@@ -26,6 +26,7 @@ export function BackButton({
   currentResource: string;
 }) {
   const backPath = useBackPath(currentResource);
+  console.log(backPath)
   return (
     <Button variant={"ghost"} asChild>
       <Link href={backPath}>

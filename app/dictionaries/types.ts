@@ -14,10 +14,15 @@ export interface PassWordInput {
 	placeHolder: string;
 }
 
+export interface ToastMessage {
+	veifyEmail: string;
+	invaliduser: string;
+}
+
 export interface Auth {
 	emailInput: EmailInput;
 	passWordInput: PassWordInput;
-	toastMessage: string;
+	toastMessage: ToastMessage;
 	submit: string;
 }
 
@@ -45,7 +50,6 @@ export interface InputName {
 	help: string;
 	button: string;
 	toast: Toast;
-	error:string
 }
 
 export interface InputEmail {
@@ -72,6 +76,15 @@ export interface Setting {
 	subTitle: string;
 	text: string;
 	modes: Mode;
+}
+
+export interface Field {
+	name: string;
+	email: string;
+	phoneNumber: string;
+	address: string;
+	ci: string;
+	salary: string;
 }
 
 export interface EmptyState {
@@ -105,6 +118,29 @@ export interface InputPhoneNumber {
 	error: string;
 }
 
+export interface InputEdit {
+	title: string;
+}
+
+export interface Save {
+	sav: string;
+	ing: string;
+	e: string;
+	fullWord: string;
+}
+
+export interface Create {
+	creat: string;
+	ing: string;
+	e: string;
+	fullWord: string;
+}
+
+export interface Button {
+	save: Save;
+	create: Create;
+}
+
 export interface Modal {
 	titleCreate: string;
 	titleUpdate: string;
@@ -113,10 +149,8 @@ export interface Modal {
 	inputSalary: InputSalary;
 	inputCi: InputCi;
 	inputPhoneNumber: InputPhoneNumber;
-}
-
-export interface Pdf {
-	button: string;
+	inputEdit: InputEdit;
+	buttons: Button;
 }
 
 export interface Report {
@@ -124,6 +158,21 @@ export interface Report {
 	salaryTendency: string;
 	salaryAverage: string;
 	bestSalary: string;
+	seeReport: string;
+}
+
+export interface InputSeach {
+	inputPlaceHolder: string;
+	selectPlaceHolder: string;
+}
+
+export interface Worker {
+	fields: Field;
+	title: string;
+	emptyState: EmptyState;
+	modal: Modal;
+	report: Report;
+	inputSeach: InputSeach;
 }
 
 export interface Day {
@@ -136,13 +185,8 @@ export interface Day {
 	saturday: string;
 }
 
-export interface Worker {
-	title: string;
-	emptyState: EmptyState;
-	modal: Modal;
-	pdf: Pdf;
-	report: Report;
-	days: Day;
+export interface Pdf {
+	button: string;
 }
 
 export interface Dictionary {
@@ -153,4 +197,6 @@ export interface Dictionary {
 	account: Account;
 	settings: Setting;
 	workers: Worker;
+	days: Day;
+	pdf: Pdf;
 }

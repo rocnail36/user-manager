@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,6 +14,7 @@ import WorkerForm from "./WorkerForm";
 import { PlusIcon } from "lucide-react";
 import { columnsAllWorkers } from "./DataTables/dataTables";
 import { DataTable } from "./DataTables/columns";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 
 type TOpenModal = (worker?: Worker) => void;
@@ -36,13 +37,13 @@ export default function WorkerList({
     worker ? setActiveWorker(worker) : setActiveWorker(null);
   };
   const closeModal = () => setOpen(false);
-
+  const {d} = useContext(LanguageContext)
   return (
     <div>
       <Modal
         open={open}
         setOpen={setOpen}
-        title={activeWorker ? "Edit Worker" : "Create Worker"}
+        title={activeWorker ? d?.workers.modal.titleUpdate : d?.workers.modal.titleCreate}
       >
         <WorkerForm
           worker={activeWorker}
@@ -61,7 +62,7 @@ export default function WorkerList({
         <EmptyState openModal={openModal} />
       ) : (
         <div className="container mx-auto py-10">
-        <DataTable columns={columnsAllWorkers} data={optimisticWorkers} />
+        <DataTable columns={columnsAllWorkers(d!)} data={optimisticWorkers} className="min-h-[80vh]"/>
       </div>
       )}
     </div>
@@ -71,17 +72,18 @@ export default function WorkerList({
 
 
 const EmptyState = ({ openModal }: { openModal: TOpenModal }) => {
+  const {d} = useContext(LanguageContext)
   return (
     <div className="text-center">
       <h3 className="mt-2 text-sm font-semibold text-secondary-foreground">
-        No workers
+        {d?.workers.emptyState.title}
       </h3>
       <p className="mt-1 text-sm text-muted-foreground">
-        Get started by creating a new worker.
+        {d?.workers.emptyState.text}
       </p>
       <div className="mt-6">
         <Button onClick={() => openModal()}>
-          <PlusIcon className="h-4" /> New Workers </Button>
+          <PlusIcon className="h-4" /> {d?.workers.emptyState.button} </Button>
       </div>
     </div>
   );

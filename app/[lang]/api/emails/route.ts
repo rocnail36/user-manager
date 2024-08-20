@@ -1,22 +1,24 @@
-import { EmailTemplate } from "@/components/emails/FirstEmail";
+import { VerificationEmail } from "@/components/emails/verificationEmail";
 import { resend } from "@/lib/email/index";
-import { emailSchema } from "@/lib/email/utils";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  console.log("assdsdsssssssss")
   const body = await request.json();
-  const { name, email } = emailSchema.parse(body);
+  const { name, email } = body;
+  console.log(body)
   try {
     const data = await resend.emails.send({
-      from: "Kirimase <onboarding@resend.dev>",
+      from: "Acme <onboarding@resend.dev>",
       to: [email],
       subject: "Hello world!",
-      react: EmailTemplate({ firstName: name }),
+      react: VerificationEmail({verificationLink:"hola"}),
       text: "Email powered by Resend.",
     });
-
+    console.log(data)
     return NextResponse.json(data);
   } catch (error) {
+    console.log(error,"aqui error")
     return NextResponse.json({ error });
   }
 }

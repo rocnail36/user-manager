@@ -1,3 +1,4 @@
+"use client"
 import { Input } from "@/components/ui/input";
 import { Table } from "@tanstack/react-table";
 import {
@@ -7,41 +8,45 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
 interface InputProps<TData> {
   table: Table<TData>;
 }
 
+type Field = "name"  | "address" | "salary" | "ci" 
+
 export default function InputSearch<TData>({ table }: InputProps<TData>) {
 
+    
 
-   const [fiel, setField] = useState("name") 
-
+   const [field, setField] = useState<Field>("name") 
+   const {d} = useContext(LanguageContext)
    const HandleChange = (e:string) => {
-       table.getColumn(fiel)?.setFilterValue("")
-       setField(e)
+       table.getColumn(field)?.setFilterValue("")
+       setField(e as Field)
    }
 
   return (
     <div className="flex gap-2">
       <Input
-        placeholder={`Filter ${fiel[0].toUpperCase() + fiel.slice(1)}...`}
-        value={(table.getColumn(fiel)?.getFilterValue() as string) ?? ""}
+        placeholder={`${d?.workers.inputSeach.inputPlaceHolder} ${d?.workers.fields[field]}`}
+        value={(table.getColumn(field)?.getFilterValue() as string) ?? ""}
         onChange={(event) =>
-          table.getColumn(fiel)?.setFilterValue(event.target.value)
+          table.getColumn(field)?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
       />
       <Select onValueChange={HandleChange}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select field" />
+          <SelectValue placeholder={d?.workers.inputSeach.selectPlaceHolder}/>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="name">Name</SelectItem>
-          <SelectItem value="adress">Adress</SelectItem>
-          <SelectItem value="ci">C.I</SelectItem>
-          <SelectItem value="salary">Salary</SelectItem>
+          <SelectItem value="name">{d?.workers.modal.inputName.title}</SelectItem>
+          <SelectItem value="address">{d?.workers.modal.inputAddress.title}</SelectItem>
+          <SelectItem value="ci">{d?.workers.modal.inputCi.title}</SelectItem>
+          <SelectItem value="salary">{d?.workers.modal.inputSalary.title}</SelectItem>
         </SelectContent>
       </Select>
     </div>

@@ -1,12 +1,13 @@
 "use client"
 
-import { ColumnDef, ColumnFilter, ColumnFiltersOptions, FilterFn, Row } from "@tanstack/react-table"
+import { ColumnDef, Row } from "@tanstack/react-table"
 
 import { type Worker, CompleteWorker } from "@/lib/db/schema/workers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { ArrowUpDown } from "lucide-react";
+import { Dictionary } from "@/app/dictionaries/types";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -20,101 +21,90 @@ const filterFn = (row:Row<Worker>,columnId:string,filterValue:string) => {
 }
 
 
-export const columnsAllWorkers: ColumnDef<CompleteWorker>[] = [
-  {
-    accessorKey: "name",
-    header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Name
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
-  },
-  {
-    accessorKey: "adress",
-    header: "Adress",
-  },
-  {
-    accessorKey:"ci",
-    header:"C.I",
-    filterFn
-  },
-  {
-    accessorKey:"phoneNumber",
 
-  },
-  {
-    accessorKey: "salary",
-    header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Salary
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
-      cell: ({row}) => {
-        const salary = row.getValue("salary")
-        const basePath = usePathname()
-        return (
-        <div className="p-4 align-middle [&:has([role=checkbox])]:pr-0" >
-        
-          {salary as number}
-        
-      </div>
-        )
-    },
-   filterFn
-  },
-  {
-    accessorKey: "id",
-    header:  () => <div>Edit User</div>,
-    cell: ({row}) => {
-        const id = row.getValue("id")
-        const basePath = usePathname()
-        return (
-        <Button variant={"link"} asChild>
-        <Link href={ basePath + "/" + id }>
-          Edit
-        </Link>
-      </Button>
-        )
-    }
-  },
-  
-]
-
-
-
-export const columnsWorkersReport: ColumnDef<CompleteWorker>[] = [
-  {
-    accessorKey: "name",
-    header: "Name"
-  },
-  {
-    accessorKey: "adress",
-    header: "Adress",
-  },
-  {
-    accessorKey:"ci",
-    header:"C.I",
-  },
-  {
-    accessorKey:"phoneNumber",
-    header:"Phone"
-  },
-  {
-    accessorKey: "salary",
-    header:"Salary"
-  },
  
-]
+ 
+ 
+
+
+export const columnsAllWorkers = (d:Dictionary) => {
+  const dModal = d.workers.modal
+  const columns: ColumnDef<CompleteWorker>[] = [
+    {
+      accessorKey: "name",
+      header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              {dModal.inputName.title}
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
+    },
+    {
+      accessorKey: "address",
+      header: d.workers.modal.inputAddress.title,
+    },
+    {
+      accessorKey:"ci",
+      header: dModal.inputCi.title,
+      filterFn
+    },
+    {
+      accessorKey:"phoneNumber",
+      header: dModal.inputPhoneNumber.title
+    },
+    {
+      accessorKey: "salary",
+      header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              {dModal.inputSalary.title}
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
+        cell: ({row}) => {
+          const salary = row.getValue("salary")
+          const basePath = usePathname()
+          return (
+          <div className="p-4 align-middle [&:has([role=checkbox])]:pr-0" >
+          
+            {salary as number}
+          
+        </div>
+          )
+      },
+     filterFn
+    },
+    {
+      accessorKey: "id",
+      header:  () => <div>{d.workers.modal.inputEdit.title}</div>,
+      cell: ({row}) => {
+          const id = row.getValue("id")
+          const basePath = usePathname()
+          return (
+          <Button variant={"link"} asChild>
+          <Link href={ basePath + "/" + id }>
+            Edit
+          </Link>
+        </Button>
+          )
+      }
+    },
+    
+  ]
+
+  return columns
+
+}
+
+
+
 

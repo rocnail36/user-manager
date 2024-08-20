@@ -1,5 +1,4 @@
 "use client"
-
 import {
   ColumnDef,
   flexRender,
@@ -10,13 +9,8 @@ import {
   getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
-  Table as TableP,
-  TableState,
-  TableOptions,
-  TableFeature,
-  TableMeta
-} from "@tanstack/react-table"
 
+} from "@tanstack/react-table"
 import {
   Table,
   TableBody,
@@ -26,12 +20,11 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
+import { useContext, useState } from "react"
 import InputSearch from "./InputSearch"
 import Link from "next/link"
 import { twMerge } from "tailwind-merge"
-
+import { LanguageContext } from "@/app/dictionaries/LanguageProvider"
 
 
 interface DataTableProps<TData, TValue> {
@@ -52,6 +45,7 @@ const [sorting, setSorting] = useState<SortingState>([])
 const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
   )
+const {d} = useContext(LanguageContext)  
 
   const table = useReactTable({
     data,
@@ -75,7 +69,7 @@ const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
          {!Isreport && (
           <div className="flex items-center py-4">
            <div className="flex justify-between gap-4">
-           <InputSearch table={table}/> <Link href={"/workers/report"}><Button>see Report</Button></Link>
+           <InputSearch table={table}/> <Link href={"/workers/report"}><Button>{d?.workers.report.seeReport}</Button></Link>
            </div>
       </div>
          )}
