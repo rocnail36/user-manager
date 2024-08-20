@@ -51,3 +51,8 @@ npm run db:migrate
 npm run dev
 ~~~   
    
+##breve explicación de la creación del proyecto 
+
+Utilicé Kirimase para generar la estructura base del proyecto, creando la vista de workers junto con sus controladores y el modelo de Prisma. Para la autenticación, elegí JWT por su facilidad de configuración. La internacionalización de la página se implementó con Next.js, encapsulando el contenido en una carpeta [lang] para asegurar que el locale esté disponible en páginas y layouts.
+
+Para manejar la traducción en componentes y esquemas de Zod, utilicé el Context API y creé funciones que aplican el diccionario correspondiente. Me adherí a la estructura de Kirimase para mantener la homogeneidad del proyecto. Utilicé las rutas anidadas de Next.js para mostrar múltiples páginas dentro de un mismo layout.
