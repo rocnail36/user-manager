@@ -59,10 +59,10 @@ Para manejar la traducción en componentes y esquemas de Zod, utilicé el Contex
 
 ## puntos de mejora 
 
-**Diccionario** se puede mejorar la estructura del diccionario haciendo que su uso sea mas senccillo y evitar el exeso de concatenación.
+**Diccionario:** Se puede mejorar la estructura del diccionario, haciéndolo más sencillo de usar y evitando el exceso de concatenación.
 
-**Componentes** hay componentes creados por kirimase que traen mucho codigo y traen varios componentes y funciones dentro de una misma carpeta se puede refactorizar para hacer el codigo mas legible, asi mismo se crearon componentes los cuales son pocos flexibles y se podrian ver beneficiados de patrones de diseño como compound patterns ejemplo de esto es la tabla en la cual se muestran los usuarios en una aplicación pequeña no da tanto problema pero para algo escalable lo mejor seria aplicar estas mejoras.
+**Componentes:** Hay componentes creados por Kirimase que contienen mucho código y varios componentes y funciones dentro de una misma carpeta. Se pueden refactorizar para hacer el código más legible. Asimismo, se crearon componentes que son poco flexibles y que podrían beneficiarse de patrones de diseño como la creación de componentes por composición. Un ejemplo de esto es la tabla en la que se muestran los usuarios; en una aplicación pequeña no causa tanto problema, pero para algo escalable sería mejor aplicar estas mejoras. 
 
-**Traducción** la pagina no esta traducida al 100%
+**Traducción:** La pagina no esta traducida al 100%
 
-**Formularios** las respuestas de los formularios asi mismo como sus respuestas muestran un margen de mejora se podrian aplicar regex y mensajes de ayuda un poco mas preciso 
+**Formularios:** los formularios muestran un margen de mejora se podrian aplicar regex y mensajes de ayuda un poco mas precisos 
