@@ -5,7 +5,6 @@ import { Adapter } from "next-auth/adapters";
 import { redirect } from "next/navigation";
 import Credentials from "next-auth/providers/credentials";
 import { compareHashedData, hashData } from "../bcrypt";
-import { Resend } from "resend";
 import { resend } from "../email";
 import { VerificationEmail } from "@/components/emails/verificationEmail";
 
@@ -47,8 +46,6 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         email: {},
         password: {},
@@ -83,7 +80,7 @@ export const authOptions: NextAuthOptions = {
             });
 
             throw new Error("verify email");
-            // return user object with their profile data
+         
           }
 
           if (!dbUser.emailVerified) {
