@@ -25,7 +25,7 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
    NEXTAUTH_URL=http://localhost:3000
    RESEND_API_KEY=your_resend_api_key
 
- **Nota** cada una de estas variables es importante para correr el proyecto
+**Nota** cada una de estas variables es importante para correr el proyecto
 
 3. **Instala las dependencias**
 
