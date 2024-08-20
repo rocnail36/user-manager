@@ -15,4 +15,14 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
    cd tu-repositorio
 
 
-2. **Configura las variables de entorno**    
+2. **Configura las variables de entorno**
+
+   Crea un archivo .env en la raíz del proyecto y añade las siguientes variables de entorno:
+   
+  ```bash
+DATABASE_URL=postgresql://postgres:mntyWlbUxCGuMVSxPmXswYWoquCyIDxZ@autorack.proxy.rlwy.net:31250/railway
+NEXTAUTH_SECRET=your_super_secret_key_here
+NEXTAUTH_URL=http://localhost:3000
+RESEND_API_KEY=re_eDB4PvQD_5Cu4AEwuqHCinuPx4fkovC8W
+
+3. **
