@@ -19,16 +19,13 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
 
    Crea un archivo .env en la raíz del proyecto y añade las siguientes variables de entorno:
    
-  ```bash
-DATABASE_URL=your_postgress_uri
-NEXTAUTH_SECRET=your_super_secret_key_here
-NEXTAUTH_URL=http://localhost:3000
-RESEND_API_KEY=your_resend_api_key
+       ```bash
+       DATABASE_URL=your_postgress_uri
+       NEXTAUTH_SECRET=your_super_secret_key_here
+       NEXTAUTH_URL=http://localhost:3000
+       RESEND_API_KEY=your_resend_api_key
 
-
-
-
-**Nota** cada una de estas variables es importante para correr el proyecto
+ **Nota** cada una de estas variables es importante para correr el proyecto
 
 3. **Instala las dependencias**
 
