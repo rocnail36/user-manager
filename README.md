@@ -68,3 +68,5 @@ Para manejar la traducción en componentes y esquemas de Zod, utilicé el Contex
 **Formularios:** los formularios muestran un margen de mejora se podrian aplicar regex y mensajes de ayuda un poco mas precisos 
 
 **Links:** customizar links para mantener la elección del idioma de la pagina.
+
+**Autenticación de correo**: mejorar la seguridad del autenticación de correo mediante jwt y no id de usuario.
