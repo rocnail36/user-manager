@@ -11,7 +11,7 @@ import { Dictionary } from "@/app/dictionaries/types";
 // You can use a Zod schema here if you want.
 
 
-const filterFn = (row:Row<Worker>,columnId:string,filterValue:string) => {
+const filterByNumbers = (row:Row<Worker>,columnId:string,filterValue:string) => {
   const search = filterValue.toLowerCase();
   let value = row.getValue(columnId) as string;
   if (typeof value === "number") value = String(value);
@@ -49,7 +49,7 @@ export const columnsAllWorkers = (d:Dictionary) => {
     {
       accessorKey:"ci",
       header: dModal.inputCi.title,
-      filterFn
+      filterFn: filterByNumbers
     },
     {
       accessorKey:"phoneNumber",
@@ -79,7 +79,7 @@ export const columnsAllWorkers = (d:Dictionary) => {
         </div>
           )
       },
-     filterFn
+     filterFn: filterByNumbers
     },
     {
       accessorKey: "id",
