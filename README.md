@@ -66,3 +66,5 @@ Para manejar la traducción en componentes y esquemas de Zod, utilicé el Contex
 **Traducción:** La pagina no esta traducida al 100%
 
 **Formularios:** los formularios muestran un margen de mejora se podrian aplicar regex y mensajes de ayuda un poco mas precisos 
+
+**Links:** customizar links para mantener la elección del idioma de la pagina.
