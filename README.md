@@ -51,8 +51,18 @@ npm run db:migrate
 npm run dev
 ~~~   
    
-##breve explicación de la creación del proyecto 
+## breve explicación de la creación del proyecto 
 
 Utilicé Kirimase para generar la estructura base del proyecto, creando la vista de workers junto con sus controladores y el modelo de Prisma. Para la autenticación, elegí JWT por su facilidad de configuración. La internacionalización de la página se implementó con Next.js, encapsulando el contenido en una carpeta [lang] para asegurar que el locale esté disponible en páginas y layouts.
 
 Para manejar la traducción en componentes y esquemas de Zod, utilicé el Context API y creé funciones que aplican el diccionario correspondiente. Me adherí a la estructura de Kirimase para mantener la homogeneidad del proyecto. Utilicé las rutas anidadas de Next.js para mostrar múltiples páginas dentro de un mismo layout.
+
+## puntos de mejora 
+
+**Diccionario** se puede mejorar la estructura del diccionario haciendo que su uso sea mas senccillo y evitar el exeso de concatenación.
+
+**Componentes** hay componentes creados por kirimase que traen mucho codigo y traen varios componentes y funciones dentro de una misma carpeta se puede refactorizar para hacer el codigo mas legible, asi mismo se crearon componentes los cuales son pocos flexibles y se podrian ver beneficiados de patrones de diseño como compound patterns ejemplo de esto es la tabla en la cual se muestran los usuarios en una aplicación pequeña no da tanto problema pero para algo escalable lo mejor seria aplicar estas mejoras.
+
+**Traducción** la pagina no esta traducida al 100%
+
+**Formularios** las respuestas de los formularios asi mismo como sus respuestas muestran un margen de mejora se podrian aplicar regex y mensajes de ayuda un poco mas preciso 
