@@ -14,8 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useBackPath } from "@/components/shared/BackButton";
 
-
-import { insertWorkerParams, type Worker,  } from "@/lib/db/schema/workers";
+import { insertWorkerParams, type Worker } from "@/lib/db/schema/workers";
 import {
   createWorkerAction,
   deleteWorkerAction,
@@ -23,10 +22,7 @@ import {
 } from "@/lib/actions/workers";
 import { LanguageContext } from "@/app/dictionaries/LanguageProvider";
 
-
-
 const WorkerForm = ({
-  
   worker,
   openModal,
   closeModal,
@@ -34,42 +30,47 @@ const WorkerForm = ({
   postSuccess,
 }: {
   worker?: Worker | null;
-  
+
   openModal?: (worker?: Worker) => void;
   closeModal?: () => void;
   addOptimistic?: TAddOptimistic;
   postSuccess?: () => void;
 }) => {
+  const { d } = useContext(LanguageContext);
 
+  const dModal = d?.workers.modal;
 
-const {d} = useContext(LanguageContext)
-
-const dModal = d?.workers.modal
-  
-const shemaParamWorKerForm = z.object({
-  id: z.string(),
-  name: z.string({message:dModal?.inputName.error}),
-  salary: z.coerce.number({message: dModal?.inputSalary.error}).nonnegative(dModal?.inputSalary.error),
-  ci: z.coerce.number({message: dModal?.inputCi.error}).nonnegative(dModal?.inputCi.error),
-  address: z.string({message:dModal?.inputAddress.error}),
-  phoneNumber: z.coerce.number({message:dModal?.inputPhoneNumber.error}).nonnegative(dModal?.inputPhoneNumber.error),
-  userId: z.string()
-}).omit({id:true,userId:true})
+  const shemaParamWorKerForm = z
+    .object({
+      id: z.string(),
+      name: z.string({ message: dModal?.inputName.error }),
+      salary: z.coerce
+        .number({ message: dModal?.inputSalary.error })
+        .nonnegative(dModal?.inputSalary.error),
+      ci: z.coerce
+        .number({ message: dModal?.inputCi.error })
+        .nonnegative(dModal?.inputCi.error),
+      address: z.string({ message: dModal?.inputAddress.error }),
+      phoneNumber: z.coerce
+        .number({ message: dModal?.inputPhoneNumber.error })
+        .nonnegative(dModal?.inputPhoneNumber.error),
+      userId: z.string(),
+    })
+    .omit({ id: true, userId: true });
 
   const { errors, hasErrors, setErrors, handleChange } =
     useValidatedForm<Worker>(shemaParamWorKerForm);
   const editing = !!worker?.id;
-  
+
   const [isDeleting, setIsDeleting] = useState(false);
   const [pending, startMutation] = useTransition();
 
   const router = useRouter();
   const backpath = useBackPath("workers");
-  
 
   const onSuccess = (
     action: Action,
-    data?: { error: string; values: Worker },
+    data?: { error: string; values: Worker }
   ) => {
     const failed = Boolean(data?.error);
     if (failed) {
@@ -81,16 +82,18 @@ const shemaParamWorKerForm = z.object({
       router.refresh();
       postSuccess && postSuccess();
       toast.success(`Worker ${action}d!`);
-      console.log(backpath)
+
       if (action === "delete") router.push(backpath);
     }
   };
 
   const handleSubmit = async (data: FormData) => {
     setErrors(null);
-    
+
     const payload = Object.fromEntries(data.entries());
-    const workerParsed = await insertWorkerParams.safeParseAsync({  ...payload });
+    const workerParsed = await insertWorkerParams.safeParseAsync({
+      ...payload,
+    });
     if (!workerParsed.success) {
       setErrors(workerParsed?.error.flatten().fieldErrors);
       return;
@@ -107,10 +110,11 @@ const shemaParamWorKerForm = z.object({
     };
     try {
       startMutation(async () => {
-        addOptimistic && addOptimistic({
-          data: pendingWorker,
-          action: editing ? "update" : "create",
-        });
+        addOptimistic &&
+          addOptimistic({
+            data: pendingWorker,
+            action: editing ? "update" : "create",
+          });
 
         const error = editing
           ? await updateWorkerAction({ ...values, id: worker.id })
@@ -118,11 +122,11 @@ const shemaParamWorKerForm = z.object({
 
         const errorFormatted = {
           error: error ?? "Error",
-          values: pendingWorker 
+          values: pendingWorker,
         };
         onSuccess(
           editing ? "update" : "create",
-          error ? errorFormatted : undefined,
+          error ? errorFormatted : undefined
         );
       });
     } catch (e) {
@@ -135,11 +139,11 @@ const shemaParamWorKerForm = z.object({
   return (
     <form action={handleSubmit} onChange={handleChange} className={"space-y-8"}>
       {/* Schema fields start */}
-              <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.name ? "text-destructive" : "",
+            errors?.name ? "text-destructive" : ""
           )}
         >
           {dModal?.inputName.title}
@@ -157,11 +161,11 @@ const shemaParamWorKerForm = z.object({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.salary ? "text-destructive" : "",
+            errors?.salary ? "text-destructive" : ""
           )}
         >
           {dModal?.inputSalary.title}
@@ -179,11 +183,11 @@ const shemaParamWorKerForm = z.object({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.ci ? "text-destructive" : "",
+            errors?.ci ? "text-destructive" : ""
           )}
         >
           {dModal?.inputCi.title}
@@ -201,11 +205,11 @@ const shemaParamWorKerForm = z.object({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.address ? "text-destructive" : "",
+            errors?.address ? "text-destructive" : ""
           )}
         >
           {dModal?.inputAddress.title}
@@ -214,7 +218,6 @@ const shemaParamWorKerForm = z.object({
           type="text"
           name="address"
           required
-          
           className={cn(errors?.address ? "ring ring-destructive" : "")}
           defaultValue={worker?.address ?? ""}
         />
@@ -224,11 +227,11 @@ const shemaParamWorKerForm = z.object({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.phoneNumber ? "text-destructive" : "",
+            errors?.phoneNumber ? "text-destructive" : ""
           )}
         >
           {dModal?.inputPhoneNumber.title}
@@ -241,7 +244,9 @@ const shemaParamWorKerForm = z.object({
           defaultValue={worker?.phoneNumber ?? ""}
         />
         {errors?.phoneNumber ? (
-          <p className="text-xs text-destructive mt-2">{errors.phoneNumber[0]}</p>
+          <p className="text-xs text-destructive mt-2">
+            {errors.phoneNumber[0]}
+          </p>
         ) : (
           <div className="h-6" />
         )}
@@ -261,7 +266,8 @@ const shemaParamWorKerForm = z.object({
             setIsDeleting(true);
             closeModal && closeModal();
             startMutation(async () => {
-              addOptimistic && addOptimistic({ action: "delete", data: worker });
+              addOptimistic &&
+                addOptimistic({ action: "delete", data: worker });
               const error = await deleteWorkerAction(worker.id);
               setIsDeleting(false);
               const errorFormatted = {
@@ -290,11 +296,11 @@ const SaveButton = ({
   errors: boolean;
 }) => {
   const { pending } = useFormStatus();
-  const  {d} = useContext(LanguageContext)
-  console.log(d,"aqui d")
+  const { d } = useContext(LanguageContext);
+
   const isCreating = pending && editing === false;
   const isUpdating = pending && editing === true;
-  const dButtons = d?.workers.modal.buttons
+  const dButtons = d?.workers.modal.buttons;
   return (
     <Button
       type="submit"
@@ -303,8 +309,12 @@ const SaveButton = ({
       aria-disabled={isCreating || isUpdating || errors}
     >
       {editing
-        ? `${dButtons?.save.sav}${isUpdating ? dButtons?.save.ing : dButtons?.save.e}`
-        : `${dButtons?.create.creat}${isCreating ? dButtons?.create.ing : dButtons?.create.e}`}
+        ? `${dButtons?.save.sav}${
+            isUpdating ? dButtons?.save.ing : dButtons?.save.e
+          }`
+        : `${dButtons?.create.creat}${
+            isCreating ? dButtons?.create.ing : dButtons?.create.e
+          }`}
     </Button>
   );
 };

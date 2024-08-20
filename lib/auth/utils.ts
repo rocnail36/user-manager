@@ -9,8 +9,6 @@ import { Resend } from "resend";
 import { resend } from "../email";
 import { VerificationEmail } from "@/components/emails/verificationEmail";
 
-
-
 declare module "next-auth" {
   interface Session {
     user: DefaultSession["user"] & {
@@ -32,7 +30,7 @@ export type AuthSession = {
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
   pages: {
-    signIn:"/sign-in"
+    signIn: "/sign-in",
   },
   session: { strategy: "jwt" },
   callbacks: {
@@ -57,7 +55,6 @@ export const authOptions: NextAuthOptions = {
       },
       authorize: async (credentials) => {
         let user = null;
-        
 
         try {
           const dbUser = await db.user.findUnique({
@@ -74,42 +71,37 @@ export const authOptions: NextAuthOptions = {
                 password,
               },
             });
-            
 
             const data = await resend.emails.send({
               from: "Acme <onboarding@resend.dev>",
               to: [credentials?.email!],
               subject: "Verificación de correo",
-              react: VerificationEmail({verificationLink: `${process.env.NEXTAUTH_URL}/verify-email/${user.id}`}),
+              react: VerificationEmail({
+                verificationLink: `${process.env.NEXTAUTH_URL}/verify-email/${user.id}`,
+              }),
               text: "Email powered by Resend.",
             });
 
-            
-          
-            
-            throw new Error("verify email")
+            throw new Error("verify email");
             // return user object with their profile data
           }
 
-          if(!dbUser.emailVerified){
-            throw new Error("verify email")
+          if (!dbUser.emailVerified) {
+            throw new Error("verify email");
           }
 
           const isValidPassword = await compareHashedData(
             credentials?.password!,
             dbUser.password!
           );
-           
+
           if (!isValidPassword) throw Error("invalid password");
 
           return dbUser;
         } catch (error) {
-           console.log(error)
-          throw error
+          throw error;
         }
       },
-
-
     }),
   ],
 };

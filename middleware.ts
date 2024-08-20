@@ -14,15 +14,14 @@ export function middleware(request: NextRequest) {
   const languages = negotiator.languages();
 
   // Check if there is any supported locale in the pathname
-  const { pathname ,basePath} = request.nextUrl;
-  
-  console.log(pathname,"aqui",basePath)
+  const { pathname, basePath } = request.nextUrl;
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
-  console.log(pathnameHasLocale)
+
   if (pathnameHasLocale) return;
-  console.log("aaaa")
+
   // Redirect if there is no locale
   const locale = match(languages, locales, defaultLocale);
   request.nextUrl.pathname = `/${locale}${pathname}`;

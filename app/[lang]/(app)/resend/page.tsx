@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link"
+import Link from "next/link";
 import { emailSchema } from "@/lib/email/utils";
 import { useRef, useState } from "react";
 import { z } from "zod";
@@ -20,7 +20,7 @@ export default function Home() {
         name: nameInputRef.current?.value,
         email: emailInputRef.current?.value,
       });
-      console.log(payload);
+
       const req = await fetch("/api/emails", {
         method: "POST",
         body: JSON.stringify(payload),
@@ -40,43 +40,43 @@ export default function Home() {
   };
   return (
     <main className="p-4 md:p-0">
-     <div>
-      <h1 className="text-2xl font-bold my-4">Send Email with Resend</h1>
       <div>
-        <ol className="list-decimal list-inside space-y-1">
-          <li>
-            <Link
-              className="text-primary hover:text-muted-foreground underline"
-              href="https://resend.com/signup"
-            >
-              Sign up
-            </Link>{" "}
-            or{" "}
-            <Link
-              className="text-primary hover:text-muted-foreground underline"
-              href="https://resend.com/login"
-            >
-              Login
-            </Link>{" "}
-            to your Resend account
-          </li>
-          <li>Add and verify your domain</li>
-          <li>
-            Create an API Key and add to{" "}
-            <span className="ml-1 font-mono font-thin text-neutral-600 bg-neutral-100 p-0.5">
-              .env
-            </span>
-          </li>
-          <li>
-            Update &quot;from:&quot; in{" "}
-            <span className="ml-1 font-mono font-thin text-neutral-600 bg-neutral-100 p-0.5">
-              app/api/email/route.ts
-            </span>
-          </li>
-          <li>Send email 🎉</li>
-        </ol>
+        <h1 className="text-2xl font-bold my-4">Send Email with Resend</h1>
+        <div>
+          <ol className="list-decimal list-inside space-y-1">
+            <li>
+              <Link
+                className="text-primary hover:text-muted-foreground underline"
+                href="https://resend.com/signup"
+              >
+                Sign up
+              </Link>{" "}
+              or{" "}
+              <Link
+                className="text-primary hover:text-muted-foreground underline"
+                href="https://resend.com/login"
+              >
+                Login
+              </Link>{" "}
+              to your Resend account
+            </li>
+            <li>Add and verify your domain</li>
+            <li>
+              Create an API Key and add to{" "}
+              <span className="ml-1 font-mono font-thin text-neutral-600 bg-neutral-100 p-0.5">
+                .env
+              </span>
+            </li>
+            <li>
+              Update &quot;from:&quot; in{" "}
+              <span className="ml-1 font-mono font-thin text-neutral-600 bg-neutral-100 p-0.5">
+                app/api/email/route.ts
+              </span>
+            </li>
+            <li>Send email 🎉</li>
+          </ol>
+        </div>
       </div>
-     </div>
       <form
         onSubmit={(e) => e.preventDefault()}
         className="space-y-3 pt-4 border-t mt-4"
@@ -121,4 +121,3 @@ export default function Home() {
     </main>
   );
 }
-
