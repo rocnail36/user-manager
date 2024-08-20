@@ -1,11 +1,9 @@
 "use client"
 
 import { ColumnDef, Row } from "@tanstack/react-table"
-
 import { type Worker, CompleteWorker } from "@/lib/db/schema/workers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
 import { ArrowUpDown } from "lucide-react";
 import { Dictionary } from "@/app/dictionaries/types";
 
@@ -72,7 +70,7 @@ export const columnsAllWorkers = (d:Dictionary) => {
         },
         cell: ({row}) => {
           const salary = row.getValue("salary")
-          const basePath = usePathname()
+        
           return (
           <div className="p-4 align-middle [&:has([role=checkbox])]:pr-0" >
           
@@ -88,10 +86,10 @@ export const columnsAllWorkers = (d:Dictionary) => {
       header:  () => <div>{d.workers.modal.inputEdit.title}</div>,
       cell: ({row}) => {
           const id = row.getValue("id")
-          const basePath = usePathname()
+          
           return (
           <Button variant={"link"} asChild>
-          <Link href={ basePath + "/" + id }>
+          <Link href={ "workers" + "/" + id }>
             Edit
           </Link>
         </Button>
