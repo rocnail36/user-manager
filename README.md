@@ -19,7 +19,7 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
 
    Crea un archivo .env en la raíz del proyecto y añade las siguientes variables de entorno:
    
-   ```bash
+      ```bash
    DATABASE_URL=your_postgress_uri
    NEXTAUTH_SECRET=your_super_secret_key_here
    NEXTAUTH_URL=http://localhost:3000
