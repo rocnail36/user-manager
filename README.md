@@ -46,9 +46,9 @@ Ejecuta el siguiente comando para instalar las dependencias del proyecto
    ```bash
    npm run db:migrate
 
-6. **Corre el proyecto**
+6. **Corre el proyecto**   
 
-   ```bash
+   ```bash      
    npm run dev
    
    
