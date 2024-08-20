@@ -32,7 +32,7 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
   Ejecuta el siguiente comando para instalar las dependencias del proyecto:
 
        ```bash
-       npm install --force
+          npm install --force
 
 **Nota** Es necesario usar "--force" para resolver un conflicto de dependencias.
 
