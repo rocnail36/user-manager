@@ -20,9 +20,22 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
    Crea un archivo .env en la raíz del proyecto y añade las siguientes variables de entorno:
    
   ```bash
-DATABASE_URL=postgresql://postgres:mntyWlbUxCGuMVSxPmXswYWoquCyIDxZ@autorack.proxy.rlwy.net:31250/railway
+DATABASE_URL=your_postgress_uri
 NEXTAUTH_SECRET=your_super_secret_key_here
 NEXTAUTH_URL=http://localhost:3000
-RESEND_API_KEY=re_eDB4PvQD_5Cu4AEwuqHCinuPx4fkovC8W
+RESEND_API_KEY=your_resend_api_key
 
-3. **
+**Nota** cada una de estas variables es importante para correr el proyecto
+
+3. **Instala las dependencias**
+
+Ejecuta el siguiente comando para instalar las dependencias del proyecto:
+
+```bash
+npm install --force
+
+**Nota** Es necesario usar "--force" para resolver un conflicto de dependencias.
+
+
+
+
