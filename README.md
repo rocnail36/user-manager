@@ -17,7 +17,7 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
 
 2. **Configura las variables de entorno**
 
-   Crea un archivo .env en la raíz del proyecto y añade las siguientes variables de entorno:
+Crea un archivo .env en la raíz del proyecto y añade las siguientes variables de entorno:
    
       ```bash
      DATABASE_URL=your_postgress_uri
@@ -29,10 +29,10 @@ Sigue los siguientes pasos para levantar el proyecto en tu entorno local.
 
 3. **Instala las dependencias**
 
-  Ejecuta el siguiente comando para instalar las dependencias del proyecto
+Ejecuta el siguiente comando para instalar las dependencias del proyecto
 
-       ```bash
-          npm install --force
+    ```bash
+       npm install --force
 
 **Nota** Es necesario usar "--force" para resolver un conflicto de dependencias.
 
