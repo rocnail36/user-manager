@@ -65,6 +65,8 @@ export const getSalaryTendencyByDays = async () => {
     },
   });
 
+  console.log(users)
+
   const salaryByDates = users.reduce((acc, user) => {
     const date = user.createdAt.toISOString().split("T")[0];
     if (!acc[date]) {
@@ -73,6 +75,7 @@ export const getSalaryTendencyByDays = async () => {
     acc[date] += user.salary;
     return acc;
   }, {} as { [key: string]: number });
+  console.log(salaryByDates)
 
   return convertSalaryToDays(salaryByDates);
 };

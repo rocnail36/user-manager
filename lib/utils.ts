@@ -21,9 +21,8 @@ export type OptimisticAction<T> = {
 
 
 
-export function convertSalaryToDays(salaryTendency:{[key:string]:number}) {
-    
-  const salaryTendencyToarray = Object.entries(salaryTendency)
+export function convertSalaryToDays(salaryTendency: { [key: string]: number }) {
+  const salaryTendencyToarray = Object.entries(salaryTendency);
   const chartData: { day: string; salary: number }[] = [];
   const nameDays = [
     "Domingo",
@@ -37,11 +36,10 @@ export function convertSalaryToDays(salaryTendency:{[key:string]:number}) {
   const today = new Date();
 
   for (let i = 0; i < 7; i++) {
-    
     const day = new Date(today);
-    day.setDate(today.getDate() - i);
-    const nombreDia = nameDays[day.getDay()];
-    chartData.push({ day: nombreDia, salary: salaryTendencyToarray[i] ? salaryTendencyToarray[i][1] : 0});
+    day.setUTCDate(today.getUTCDate() - i);
+    const nombreDia = nameDays[day.getUTCDay()];
+    chartData.push({ day: nombreDia, salary: salaryTendencyToarray[i] ? salaryTendencyToarray[i][1] : 0 });
   }
 
   return chartData;
