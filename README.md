@@ -71,4 +71,4 @@ Para manejar la traducción en componentes y esquemas de Zod, utilicé el Contex
 
 **Autenticación de correo**: mejorar la seguridad del autenticación de correo mediante jwt y no id de usuario.
 
-**Zona Horaria** zona horaria entre server y latam es diferente.
+**Zona Horaria** zona horaria entre server y latam es diferente vercel se maneja con la zona horaira utc.
