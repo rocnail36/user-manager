@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 
 
 
+
+
 export default async function LandingPage({params:{lang}}:{params:{lang:Locale}}) {
  
   const d = await getDictionary(lang)
@@ -25,6 +27,7 @@ export default async function LandingPage({params:{lang}}:{params:{lang:Locale}}
             </Button>
         
           </Link>
+     
           
     </div>
   );
