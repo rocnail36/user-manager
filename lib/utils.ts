@@ -37,7 +37,6 @@ export function convertSalaryToDays(salaryTendency: { [key: string]: {day:number
   for(let i = 0;i < 7;i++){
     
     const date = new Date()
-    
     date.setDate(date.getDate() - i)
     const today = date.getDay()
     const salaryTendencyDay = salaryTendency[today]
@@ -49,8 +48,6 @@ export function convertSalaryToDays(salaryTendency: { [key: string]: {day:number
    
   }
 
-
-   console.log(chartData)
   
   return chartData;
 }
