@@ -50,13 +50,13 @@ export const getWorkersBestSalary = async () => {
 export const getSalaryTendencyByDays = async () => {
   const session = await getUserAuth();
 
-  const tenDaysAgo = subDays(new Date(), 7);
+  const sevenDaysAgo = subDays(new Date(), 6);
 
   const users = await db.worker.findMany({
     select: { salary: true, createdAt: true },
     where: {
       createdAt: {
-        gte: startOfDay(tenDaysAgo),
+        gte: startOfDay(sevenDaysAgo),
       },
       userId: session.session?.user.id,
     },
@@ -64,6 +64,8 @@ export const getSalaryTendencyByDays = async () => {
       createdAt: "desc",
     },
   });
+
+  console.log(users)
 
   const salaryByDates = users.reduce((acc, user) => {
     const date = user.createdAt
@@ -75,7 +77,7 @@ export const getSalaryTendencyByDays = async () => {
    
     return acc;
   }, {} as { [key: string]: {salary:number,day:number} });
-  console.log(salaryByDates)
+  
 
   return convertSalaryToDays(salaryByDates);
 };
